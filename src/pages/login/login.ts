@@ -21,7 +21,7 @@ export class LoginPage {
     console.log('ionViewDidLoad LoginPage');
   }
 
-  signIn(event: LoginResponse){
+  logIn(event: LoginResponse){
     console.log(event);
     if (!event.error){
       this.toastController.create({
