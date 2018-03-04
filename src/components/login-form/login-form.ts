@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { NavController } from "ionic-angular";
 import { AngularFireAuth } from 'angularfire2/auth'
 import { Account } from '../../models/account/account.interface'
+import {LoginResponse} from "../../models/login/login-response.interface";
 
 @Component({
   selector: 'app-login-form',
@@ -11,22 +12,30 @@ export class LoginFormComponent {
 
   account = {} as Account;
 
+  @Output() loginStatus: EventEmitter<any>;
+
   constructor(private navCtrl:NavController,
-              private afAuth: AngularFireAuth) {
-    console.log('Hello LoginFormComponent Component');
+              private afAuth: AngularFireAuth)
+  {
+    this.loginStatus = new EventEmitter<any>();
   }
 
-  navigateToPage(pageName: string){
-    pageName === 'TabsPage' ? this.navCtrl.setRoot(pageName): this.navCtrl.push(pageName);
+  navigateToRegisterPage(){
+    this.navCtrl.push('RegisterPage');
   }
 
   async login(){
     try {
-      const result = await this.afAuth.auth.signInWithEmailAndPassword(this.account.email, this.account.password);
-      console.log(result);
+      const result:LoginResponse = {
+        result: await this.afAuth.auth.signInWithEmailAndPassword(this.account.email, this.account.password)
+      };
+      this.loginStatus.emit(result);
 
     } catch (e) {
-      console.error(e);
+      const error:LoginResponse = {
+        error: e
+      };
+      this.loginStatus.emit(error)
     }
   }
 
