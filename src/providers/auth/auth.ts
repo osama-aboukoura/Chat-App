@@ -10,6 +10,13 @@ export class AuthProvider {
     console.log('Hello AuthProvider Provider');
   }
 
+  /**
+   * returns info related to the Authenticated user such as email and id
+   */
+  getAuthenticatedUser(){
+    return this.angularFireAuth.authState;
+  }
+
   async createUserWithEmailAndPassword(account: Account) {
     try {
       return <LoginResponse> {

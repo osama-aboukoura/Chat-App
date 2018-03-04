@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import {IonicPage, NavController, NavParams, ToastController} from 'ionic-angular';
 import {LoginResponse} from "../../models/login/login-response.interface";
+import {EditProfilePage} from "../edit-profile/edit-profile";
 
 @IonicPage()
 @Component({
@@ -28,7 +29,7 @@ export class LoginPage {
         message: `Welcome to Chat! ${event.result.email}`,
         duration: 3000
       }).present();
-      this.navCtrl.setRoot('ProfilePage')
+      this.navCtrl.setRoot('EditProfilePage')
     }
     else {
       this.toastController.create({
