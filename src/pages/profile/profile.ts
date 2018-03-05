@@ -19,7 +19,7 @@ export class ProfilePage {
     this.existingProfile = profile
   }
 
-  
+
   navigateToEditProfilePage(){
 
     this.navCtrl.push('EditProfilePage', {existingProfile: this.existingProfile});
