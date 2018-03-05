@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, Output, EventEmitter} from '@angular/core';
 import {DataProvider} from "../../providers/data/data";
 import {AuthProvider} from "../../providers/auth/auth";
 import {User} from "firebase/app";
@@ -12,9 +12,11 @@ import {LoadingController, Loading} from "ionic-angular";
 export class ProfileViewComponent implements OnInit{
 
   // holds the loading message shown while retrieving from firebase
-  loader: Loading;
+  private loader: Loading;
 
   userProfile: Profile;
+
+  @Output() existingProfile: EventEmitter<Profile>;
 
   /**
    * components don't work with ionViewDidLoad
@@ -28,6 +30,7 @@ export class ProfileViewComponent implements OnInit{
         .snapshotChanges()
         .subscribe(profile => {
         this.userProfile = <Profile>profile.payload.val();
+        this.existingProfile.emit(this.userProfile);
         this.loader.dismiss();
       })
     })
@@ -37,6 +40,8 @@ export class ProfileViewComponent implements OnInit{
               private data: DataProvider,
               private auth: AuthProvider)
   {
+    this.existingProfile = new EventEmitter<Profile>();
+
     this.loader = this.loadingController.create({
       content: "Loading profile..."
     });

@@ -1,4 +1,4 @@
-import {Component, EventEmitter, OnDestroy, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
 import { Subscription } from 'rxjs/Subscription'
 import { Profile } from "../../models/profile/profile";
 import { DataProvider } from "../../providers/data/data";
@@ -9,14 +9,20 @@ import { User } from "firebase/app";
   selector: 'app-edit-profile-form',
   templateUrl: 'edit-profile-form.html'
 })
-export class EditProfileFormComponent implements OnDestroy{
+export class EditProfileFormComponent implements OnInit, OnDestroy{
+
+  ngOnInit(): void {
+    if (!this.profile){
+      this.profile = {} as Profile;
+    }
+  }
 
   private authenticatedUser$: Subscription;
   private authenticatedUser: User;
 
   @Output() saveProfileResult: EventEmitter<Boolean>;
 
-  profile = {} as Profile;
+  @Input() profile: Profile;
 
   constructor(private data: DataProvider, private auth: AuthProvider) {
     this.saveProfileResult = new EventEmitter<boolean>();

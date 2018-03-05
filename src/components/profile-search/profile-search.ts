@@ -12,29 +12,17 @@ export class ProfileSearchComponent {
 
   query: string;
 
+
+
   // profileList: Profile[];
-  public groupMeetingFB$: Observable<Profile[]>;
+  public profileList: Observable<Profile[]>;
 
   constructor(private data: DataProvider) {
 
   }
-  //
-  // searchUser(query: string){
-  //   this.data.searchUser(query).subscribe(profiles => {
-  //     this.profileList = profiles as Profile[];
-  //     console.log(this.profileList);
-  //   })
-  // }
-
-  // searchUser(query: string){
-  //   this.data.searchUser(query).subscribe(profiles => {
-  //     console.log("profiles:")
-  //     console.log(profiles);
-  //   })
-  // }
 
   searchUser(event){
-    this.groupMeetingFB$ = this.data
+    this.profileList = this.data
       .searchUser(this.query) // db list
       .snapshotChanges() // key,value pairs
       .map(changes => {
@@ -43,7 +31,7 @@ export class ProfileSearchComponent {
         }))
       });
 
-    console.log("groupMeetingFB$");
-    console.log(this.groupMeetingFB$);
+    console.log("profileList");
+    console.log(this.profileList);
   }
 }
