@@ -41,4 +41,9 @@ export class DataProvider {
     return this.database.list('profiles', ref => ref.orderByChild('firstName').equalTo(firstName));
 
   }
+
+  getAllUsers(){
+    return this.database.list('profiles');
+  }
+
 }

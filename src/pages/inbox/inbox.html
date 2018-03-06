@@ -4,7 +4,7 @@
     <ion-title>Inbox</ion-title>
     <ion-buttons end >
       <button ion-button icon-only (click)="navigateToSearchUserPage()">
-        <ion-icon name="add"></ion-icon>
+        <ion-icon name="search"></ion-icon>
       </button>
     </ion-buttons>
   </ion-navbar>
@@ -15,12 +15,12 @@
 <ion-content padding>
 
   <ion-list>
-    <ion-item *ngFor="let message of messageList">
+    <ion-item *ngFor="let profile of allProfiles$ | async" (click)="openChat(profile)">
       <ion-avatar item-left>
-        <img [src]="message.user.avatar" alt="Avatar">
+        <img src="assets/imgs/avatar-male.png" alt="Avatar">
       </ion-avatar>
-      <h2>{{message.user.firstName}} {{message.user.lastName}}</h2>
-      <p>{{message.lastMessage}}</p>
+      <h2>{{profile.firstName}} {{profile.lastName}}</h2>
+      <p>Hey there, I'm using Chat!</p>
     </ion-item>
   </ion-list>
 
