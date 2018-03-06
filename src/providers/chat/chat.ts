@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import {AngularFireDatabase} from "angularfire2/database";
+import {AngularFireDatabase, AngularFireList} from "angularfire2/database";
+import {Channel} from "../../models/channel/channel";
 
 @Injectable()
 export class ChatProvider {
@@ -11,5 +12,8 @@ export class ChatProvider {
     this.database.list('channel-names').push({name: channelName});
   }
 
+  getChannelsListRef(){
+    return this.database.list<Channel>('channel-names');
 
+  }
 }

@@ -14,4 +14,10 @@
 
 <ion-content padding>
 
+  <ion-list>
+    <ion-item *ngFor="let channel of channelsList$ | async">
+      #{{channel.name}}
+    </ion-item>
+  </ion-list>
+
 </ion-content>
