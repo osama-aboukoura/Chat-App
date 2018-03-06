@@ -1,7 +1,7 @@
 <ion-searchbar [(ngModel)]="query" (ionChange)="searchUser($event)"></ion-searchbar>
 
 <ion-list>
-  <ion-item *ngFor="let profile of profileList | async">
+  <ion-item *ngFor="let profile of profileList | async" (click)="selectProfile(profile)">
     <ion-avatar item-left>
       <img src="assets/imgs/avatar-male.png" alt="avatar">
     </ion-avatar>

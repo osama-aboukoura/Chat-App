@@ -1,7 +1,6 @@
-import { Component } from '@angular/core';
+import {Component, EventEmitter, Output} from '@angular/core';
 import {DataProvider} from "../../providers/data/data";
 import {Profile} from "../../models/profile/profile";
-import {Pro} from "@ionic/pro";
 import {Observable} from "rxjs/Observable";
 
 @Component({
@@ -12,13 +11,13 @@ export class ProfileSearchComponent {
 
   query: string;
 
-
-
   // profileList: Profile[];
   public profileList: Observable<Profile[]>;
 
-  constructor(private data: DataProvider) {
+  @Output() selectedProfile: EventEmitter<Profile>;
 
+  constructor(private data: DataProvider) {
+    this.selectedProfile = new EventEmitter<Profile>();
   }
 
   searchUser(event){
@@ -33,5 +32,9 @@ export class ProfileSearchComponent {
 
     console.log("profileList");
     console.log(this.profileList);
+  }
+
+  selectProfile(profile: Profile){
+    this.selectedProfile.emit(profile);
   }
 }
