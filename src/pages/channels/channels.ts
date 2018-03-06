@@ -3,6 +3,7 @@ import {AlertController, IonicPage, NavController, NavParams} from 'ionic-angula
 import {ChatProvider} from "../../providers/chat/chat";
 import {Observable} from "rxjs/Observable";
 import {Channel} from "../../models/channel/channel";
+import {ChannelChatPage} from "../channel-chat/channel-chat";
 
 @IonicPage()
 @Component({
@@ -51,5 +52,9 @@ export class ChannelsPage {
         }
       ]
     }).present();
+  }
+
+  selectChannel(channel: Channel){
+    this.navCtrl.push('ChannelChatPage', {channel: channel});
   }
 }
