@@ -43,4 +43,12 @@ export class AuthProvider {
     }
   }
 
+
+  signOut(){
+    try {
+      this.angularFireAuth.auth.signOut();
+    } catch (e) {
+      console.log("error while logging out")
+    }
+  }
 }
