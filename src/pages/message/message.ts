@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import {Profile} from "../../models/profile/profile";
 import {Message} from "../../models/messages/message";
 import {MESSAGE_LIST} from "../../mocks/messages/messages";
+import {AuthProvider} from "../../providers/auth/auth";
 
 @IonicPage()
 @Component({
@@ -15,12 +16,16 @@ export class MessagePage {
 
   messageList: Message[];
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  userId;
+
+  constructor(public navCtrl: NavController, public navParams: NavParams, private auth: AuthProvider) {
     this.messageList = MESSAGE_LIST;
   }
 
   ionViewWillLoad() {
     this.selectedProfile = this.navParams.get('profile');
+    this.auth.getAuthenticatedUser()
+      .subscribe(auth => this.userId = auth.uid);
   }
 
 }
